@@ -1,0 +1,10 @@
+def filtra(lista_palavras, numero):
+    filtradas = []
+    
+    for palavra in lista_palavras:
+        palavra = palavra.lower() 
+        palavra = palavra.strip("!?,.@")  
+        if len(palavra) == numero and palavra not in filtradas:
+            filtradas.append(palavra)
+    
+    return filtradas
