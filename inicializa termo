@@ -1,0 +1,6 @@
+import random
+
+def inicializa(lista_palavras):
+    dic = {'n': len(lista_palavras[0]),  'tentativas': len(lista_palavras[0]) + 1, 'especuladas': [],  'sorteada': random.choice(lista_palavras)}
+
+    return dic
