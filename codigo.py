@@ -5,6 +5,7 @@ import random
 numero = 5
 filtradas = []
 
+print(' ===========================\n|                           |\n| Bem-vindo ao Insper Termo |')
 def inidica_posicao(palavra_sorteada, palavra_especulada):
     palavra_especulada = palavra_especulada.lower()
     palavra_sorteada= palavra_sorteada.lower()
@@ -36,15 +37,34 @@ while jogando:
     jogadas += 1
     palavra_sorteada = dic['sorteada']
     palavra_especulada = str(input('Qual é seu palpite? '))
+    if palavra_especulada not in filtradas:
+        print('palavra desconhecida')
+    elif palavra_especulada not in dic['especuladas']:
+            
+        dic['especuladas'].append(palavra_especulada)
 
-    if len(palavra_especulada) != 5:
-        print("apenas palavras de 5 letras")
-    else:
-        tentativa = inidica_posicao(palavra_sorteada, palavra_especulada)
-        j = 0
-        for i in tentativa:
-            if i == 0:
-                j += 1
+        if len(palavra_especulada) != 5:
+            print("apenas palavras de 5 letras")
+
+        else:
+            resta = int(len(filtradas[0]) + 1) - jogadas
+            tentativa = inidica_posicao(palavra_sorteada, palavra_especulada)
+            j = 0
+            for i in tentativa:
+                if i == 0:
+                    j += 1
             if j == 5:
                 print(f'*** Parabéns! Você acertou após {jogadas} tentativas')
                 jogando = 0
+            else:
+                if resta == 0:
+                    print('Perdeu')
+                    str(input('Quer jogar dnv? (s/n) '))
+                    jogando = 0
+                else:
+
+                    print('\nInsper :: TERMO')
+                    print(f'Você tem {resta} tentativa(s)')
+    else:
+        print('Palavra já testada!')
+        
