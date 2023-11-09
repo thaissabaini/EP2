@@ -34,37 +34,48 @@ dic = {'n': len(filtradas[0]),  'tentativas': len(filtradas[0]) + 1, 'especulada
 print (dic['sorteada'])
 jogadas = 0
 while jogando:
-    jogadas += 1
     palavra_sorteada = dic['sorteada']
     palavra_especulada = str(input('Qual é seu palpite? '))
-    if palavra_especulada not in filtradas:
+    if palavra_especulada == 'desisto':
+        if input('Tem certeza que deseja desistir da rodada? [s|n] ') == 's':
+            print(f'>>> Que deselegante desistir, a palavra era: {palavra_sorteada}\n')
+            pergunta = str(input('Jogar novamente? [s|n] '))
+            if pergunta == 's':
+                dic = {'n': len(filtradas[0]),  'tentativas': len(filtradas[0]) + 1, 'especuladas': [],  'sorteada': random.choice(filtradas)}
+                jogadas = 0
+            else:
+                print('\n\n\nAté a próxima!')
+                jogando = 0
+
+    elif len(palavra_especulada) != 5:
+        print("apenas palavras de 5 letras")
+    elif palavra_especulada not in filtradas:
         print('palavra desconhecida')
     elif palavra_especulada not in dic['especuladas']:
-            
+        jogadas += 1
         dic['especuladas'].append(palavra_especulada)
 
-        if len(palavra_especulada) != 5:
-            print("apenas palavras de 5 letras")
-
+        resta = int(len(filtradas[0]) + 1) - jogadas
+        tentativa = inidica_posicao(palavra_sorteada, palavra_especulada)
+        j = 0
+        for i in tentativa:
+            if i == 0:
+                j += 1
+        if j == 5:
+            print(f'*** Parabéns! Você acertou após {jogadas} tentativas')
+            jogando = 0
         else:
-            resta = int(len(filtradas[0]) + 1) - jogadas
-            tentativa = inidica_posicao(palavra_sorteada, palavra_especulada)
-            j = 0
-            for i in tentativa:
-                if i == 0:
-                    j += 1
-            if j == 5:
-                print(f'*** Parabéns! Você acertou após {jogadas} tentativas')
-                jogando = 0
-            else:
-                if resta == 0:
-                    print('Perdeu')
-                    str(input('Quer jogar dnv? (s/n) '))
-                    jogando = 0
+            if resta == 0:
+                print('Perdeu')
+                pergunta = str(input('Jogar novamente? [s|n] '))
+                if pergunta == 's':
+                    dic = {'n': len(filtradas[0]),  'tentativas': len(filtradas[0]) + 1, 'especuladas': [],  'sorteada': random.choice(filtradas)}
+                    jogadas = 0
                 else:
-
-                    print('\nInsper :: TERMO')
-                    print(f'Você tem {resta} tentativa(s)')
+                    jogando = 0
+            else:
+                print('\nInsper :: TERMO')
+                print(f'Você tem {resta} tentativa(s)')
     else:
         print('Palavra já testada!')
         
