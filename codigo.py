@@ -100,7 +100,7 @@ while jogando:
                     print(linhas[i])
                 print(divisor)
             if certo == 5:
-                print(f'\n*** Parabéns! Você acertou após {jogadas} tentativa(s)')
+                print(f'\n★ ★ ★ PARABÉNS! Você acertou após {jogadas} tentativa(s) ★ ★ ★')
                 jogando = 0
             else:
                 print(f'\nVocê tem {resta} tentativa (s)')
