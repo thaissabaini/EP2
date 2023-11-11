@@ -104,6 +104,8 @@ while jogando:
                 jogando = 0
             else:
                 print(f'\nVocê tem {resta} tentativa (s)')
+            if resta == 0:
+                print(f' A palavra correta era {palavra_sorteada}.')
     else:
         print('Palavra já testada!')
 
